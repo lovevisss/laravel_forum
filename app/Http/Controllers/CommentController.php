@@ -50,13 +50,19 @@ class CommentController extends Controller
                 "comment" => $comment,
                 "to_user" => $to_user,
                 "id" => $id,
+                "comment_id" => $com->id,
                 "avatar" => Auth::user()->avatar,
                 "time" => date('Y-m-d H:i:s',time())
         );
        return $ret;
     }
 
-
+    public function delete_comment(Request $request)
+    {
+        $comment_id = $request->input('comment_id');
+        $com = Comment::find($comment_id)->delete();
+        return "done";
+    }
     
 
 }

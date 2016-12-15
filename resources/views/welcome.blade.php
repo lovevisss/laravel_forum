@@ -85,9 +85,9 @@
                                     @foreach($item->comments as $single_comment)
                                         <li class="comment_li"><a href="#"><img src="{{App\User::find($single_comment->uid)->avatar}}" alt="" class="comment_icon">
                                             @if(Auth::user()->id == App\User::find($single_comment->uid)->id)
-                                                我: <a href="#" class="reply">删除</a>
+                                                我: <a href="javascript:;" class="reply" comment-id="{{$single_comment->id}}">删除</a>
                                             @else
-                                                {{App\User::find($single_comment->uid)->name}}: <a href="#" class="reply">回复</a>
+                                                {{App\User::find($single_comment->uid)->name}}: <a href="javascript:;" class="reply" comment-id="{{$single_comment->id}}">回复</a>
                                             @endif
                                         </a>{{$single_comment->comment}}<br><span class="time">{{$single_comment->created_at}}</span></li>
                                     @endforeach

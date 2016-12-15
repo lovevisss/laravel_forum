@@ -112,7 +112,7 @@ window.onload = function () {
       // $(".comment_box").focus();
       // $(".comment_box").blur();
       $commentbox.removeClass('text-box-on');
-      $(comment_list[0]).append("<li class='comment_li'><a href='#'><img src=" + msg['avatar'] + " class='comment_icon'>"+"我:" + "</a>" + "<a href='#' class='reply'>删除</a>"+msg['comment'] + "<br><span class='time'>" + msg['time'] +"</span></li>");
+      $(comment_list[0]).append("<li class='comment_li'><a href='#'><img src=" + msg['avatar'] + " class='comment_icon'>"+"我:" + "</a>" + "<a href='javascript:;' class='reply' comment-id="+ msg['comment_id']+">删除</a>"+msg['comment'] + "<br><span class='time'>" + msg['time'] +"</span></li>");
     })
     .fail(function() {
       console.log("error");
@@ -165,6 +165,30 @@ window.onload = function () {
  $(".close").click(function(event) {
    $(this).parent().remove();
  });
+
+ $(".comment_list").on('click', '.reply', function(event) {
+  comment_li = $(this).parent();
+   if($(this).html() == "删除")  //删除
+   {
+
+    $comment_id = $(this).attr("comment-id");
+    $.ajaxSetup({
+        headers: { 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content') }
+    });
+    $.ajax(
+          {
+            url: 'delete_comment',
+            method : 'POST' ,
+            data: { comment_id: $comment_id}})
+    .done(function(msg) {
+      $(comment_li).remove();
+    });
+   }
+   else{                        //回复
+    alert("reply");
+   }
+ });
+
 }
 
 

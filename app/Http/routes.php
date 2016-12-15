@@ -51,4 +51,6 @@ Route::group(['middleware' => 'web'], function () {
 	Route::get('test_relation2', 'UserController@test');
 	Route::post('/home', 'ItemController@zan');
 	Route::post('/comment', 'CommentController@post_comment');
+	Route::post('/delete_comment', 'CommentController@delete_comment');
+	
 });
