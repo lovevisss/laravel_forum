@@ -112,7 +112,7 @@ window.onload = function () {
       // $(".comment_box").focus();
       // $(".comment_box").blur();
       $commentbox.removeClass('text-box-on');
-      $(comment_list[0]).append("<li class='comment_li'><a href='#'><img src=" + msg['avatar'] + " class='comment_icon'>"+"我:" + "</a>" + msg['comment'] + "<br><span class='time'>" + msg['time'] +"</span></li>");
+      $(comment_list[0]).append("<li class='comment_li'><a href='#'><img src=" + msg['avatar'] + " class='comment_icon'>"+"我:" + "</a>" + "<a href='#' class='reply'>删除</a>"+msg['comment'] + "<br><span class='time'>" + msg['time'] +"</span></li>");
     })
     .fail(function() {
       console.log("error");
@@ -128,6 +128,8 @@ window.onload = function () {
         // alert("fl");
         $(this).select();
         $(this).parent().addClass('text-box-on');
+        $(this).next().next().html($(this).val().length + "/140"); //获取文字节点
+        $(this).next().removeAttr('disabled');
  });
  $(".comment_box").blur(function(event) {
         $val = $(this).val();
@@ -140,6 +142,24 @@ window.onload = function () {
                 }, 200);
 
         }
+ });
+
+ $(".comment_box").keyup(function(event) {
+   $val = $(this).val();
+   var len = $val.length;
+   var els = $(this).parent().children();
+   var btn = els[1];
+   var word = els[2];
+   if(len <= 0 || len > 140)
+   {
+    $(btn).addClass('btn-off');
+    $(btn).attr('disabled', 'true');
+   }
+   else{
+    $(btn).removeClass('btn-off');
+    $(btn).removeAttr('disabled');
+   }
+   $(word).html(len + '/140');
  });
 
  $(".close").click(function(event) {

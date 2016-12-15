@@ -85,9 +85,9 @@
                                     @foreach($item->comments as $single_comment)
                                         <li class="comment_li"><a href="#"><img src="{{App\User::find($single_comment->uid)->avatar}}" alt="" class="comment_icon">
                                             @if(Auth::user()->id == App\User::find($single_comment->uid)->id)
-                                                我:
+                                                我: <a href="#" class="reply">删除</a>
                                             @else
-                                                {{App\User::find($single_comment->uid)->name}}:
+                                                {{App\User::find($single_comment->uid)->name}}: <a href="#" class="reply">回复</a>
                                             @endif
                                         </a>{{$single_comment->comment}}<br><span class="time">{{$single_comment->created_at}}</span></li>
                                     @endforeach
@@ -96,6 +96,7 @@
                                     
                                     <textarea name="" id="" cols="30" rows="10" class="comment_box">评论…</textarea>
                                     <button class="btn btn-primary btn_comment" data-id="{{$item->id}}">回复</button>
+                                    <span class="countword">0/140</span>
                                 </div>
                             </div>
                         </div>
