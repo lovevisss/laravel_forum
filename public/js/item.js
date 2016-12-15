@@ -141,6 +141,10 @@ window.onload = function () {
 
         }
  });
+
+ $(".close").click(function(event) {
+   $(this).parent().remove();
+ });
 }
 
 

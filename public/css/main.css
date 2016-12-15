@@ -29,6 +29,15 @@
 	width: 85%;
 }
 
+.item:hover .close{
+	display: block;
+}
+
+.close{
+	margin-top: -20px;
+	display: none;
+}
+
 .item a:hover{
 	text-decoration: none;
 }

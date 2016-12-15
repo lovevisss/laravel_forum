@@ -27,7 +27,7 @@
                 <div class="panel-body">
                     @foreach($items as $item)
                         <div class="item clearfix">
-                            
+                            <a class="close" href="javascript:;">x</a>
                             <img src="{{$item->author->avatar}}" alt="" class="icon">
                             <div class="content">
                               
