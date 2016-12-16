@@ -87,7 +87,7 @@
                                             @if(Auth::user()->id == App\User::find($single_comment->uid)->id)
                                                 我: <a href="javascript:;" class="reply" comment-id="{{$single_comment->id}}">删除</a>
                                             @else
-                                                {{App\User::find($single_comment->uid)->name}}: <a href="javascript:;" class="reply" comment-id="{{$single_comment->id}}">回复</a>
+                                                {{App\User::find($single_comment->uid)->name}}: <a href="javascript:;" class="reply" comment-id="{{$single_comment->id}}" user-id="{{App\User::find($single_comment->uid)->id}}" user-name="{{App\User::find($single_comment->uid)->name}}">回复</a>
                                             @endif
                                         </a>{{$single_comment->comment}}<br><span class="time">{{$single_comment->created_at}}</span></li>
                                     @endforeach

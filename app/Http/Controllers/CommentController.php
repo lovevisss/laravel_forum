@@ -30,7 +30,7 @@ class CommentController extends Controller
     {
        $comment = $request->input('comment');
        $id = $request->input('data_id');
-       $to_user = $request->input('data-to-user');
+       $to_user = $request->input('to_user');
        $uid = Auth::user()->id;
        if(is_null($to_user))
        {
@@ -42,7 +42,11 @@ class CommentController extends Controller
 
        }
        else{
-
+            $com = Comment::create(['itemid' => $id,
+                                'comment' => $comment,
+                                'uid' => $uid,
+                                'reply_to_uid' => $to_user
+                ]);
 
        }
 

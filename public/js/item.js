@@ -167,27 +167,34 @@ window.onload = function () {
  });
 
  $(".comment_list").on('click', '.reply', function(event) {
-  comment_li = $(this).parent();
-   if($(this).html() == "删除")  //删除
-   {
+    comment_li = $(this).parent();
 
-    $comment_id = $(this).attr("comment-id");
-    $.ajaxSetup({
-        headers: { 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content') }
-    });
-    $.ajax(
-          {
-            url: 'delete_comment',
-            method : 'POST' ,
-            data: { comment_id: $comment_id}})
-    .done(function(msg) {
-      $(comment_li).remove();
-    });
-   }
-   else{                        //回复
-    alert("reply");
-   }
- });
+    $user_id = $(this).attr("user-id");
+    $user_name = $(this).attr("user-name");
+    if($(this).html() == "删除")  //删除
+    {
+     $comment_id = $(this).attr("comment-id");
+     $.ajaxSetup({
+         headers: { 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content') }
+     });
+     $.ajax(
+           {
+             url: 'delete_comment',
+             method : 'POST' ,
+             data: { comment_id: $comment_id}})
+     .done(function(msg) {
+       $(comment_li).remove();
+     });
+    }
+    else{
+        comment = $(comment_li).parent().next();  
+        $(comment).addClass('text-box-on');        //回复
+        comment_box = $(comment).find('.comment_box');
+        $(comment_box[0]).val("回复"+$user_name+":").focus();
+        btn_comment = $(comment).find('.btn_comment');
+        $(btn_comment[0]).attr('data-to-user', $user_id);
+    }
+  });
 
 }
 
